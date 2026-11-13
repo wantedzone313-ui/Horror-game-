@@ -11,8 +11,10 @@ jobs:
       GODOT_VERSION: "4.3"
     steps:
       - uses: actions/checkout@v4
-      - name: Unpack game.zip
-        run: unzip -o game.zip -d .
+      - name: Unpack game.zip (clean old files first)
+        run: |
+          rm -rf scripts models tex
+          unzip -o game.zip -d .
       - name: Setup templates and editor settings
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/ ~/.config/godot
